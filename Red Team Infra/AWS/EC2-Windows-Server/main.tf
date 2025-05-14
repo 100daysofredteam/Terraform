@@ -68,7 +68,7 @@ module "kali_sg" {
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
-      cidr_blocks = [local.my_ip_cidr]
+      cidr_blocks = [local.my_ip_cidr, var.public_subnet_cidr]
     },
     {
       description = "RDP access from my IP"
@@ -105,14 +105,14 @@ module "kali_ec2" {
 
 
 module "windows_ec2" {
-  source        = "./modules/ec2_instance"
-  ami_id        = var.windows_ami_id
-  instance_type = var.windows_instance_type
-  subnet_id     = module.public_subnet.subnet_id
-  key_name      = var.key_name
-  instance_name = "windows-attacker"
-  environment   = terraform.workspace
-  user_data = templatefile("${path.module}/scripts/windows_user_data_template.ps1", {})
+  source            = "./modules/ec2_instance"
+  ami_id            = var.windows_ami_id
+  instance_type     = var.windows_instance_type
+  subnet_id         = module.public_subnet.subnet_id
+  key_name          = var.key_name
+  instance_name     = "windows-attacker"
+  environment       = terraform.workspace
+  user_data         = templatefile("${path.module}/scripts/windows_user_data_template.ps1", {})
   volume_size       = 30
   security_group_id = module.kali_sg.sg_id
 }
