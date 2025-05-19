@@ -77,11 +77,13 @@ echo  '[+] Enabled and started Havoc C2 service' >> /home/ubuntu/log.txt
 
 # Installing and enabling autossh
 
+ssh-keyscan -H ${redirector_private_ip} >> /home/ubuntu/.ssh/known_hosts
+
 sudo apt-get install -y autossh
 
 echo  '[+] Installed autossh' >> /home/ubuntu/log.txt
 
-# Write SSH config with escaped $ signs for Terraform
+# Write SSH config
 cat <<EOF > /home/ubuntu/.ssh/config
 Host redirector-1
     HostName ${redirector_private_ip}
