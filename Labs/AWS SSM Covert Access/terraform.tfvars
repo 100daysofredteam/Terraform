@@ -1,0 +1,7 @@
+vpc_cidr           = "192.168.0.0/16"
+aws_region         = "us-east-1"
+availability_zone  = "us-east-1a"
+public_subnet_cidr = "192.168.1.0/24"
+instance_type      = "t3.micro"
+ami_id             = "ami-084568db4383264d4"
+key_name           = "100daysofredteam-key"
