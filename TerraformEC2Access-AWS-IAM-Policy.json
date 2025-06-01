@@ -5,6 +5,7 @@
 			"Sid": "EC2CoreActions",
 			"Effect": "Allow",
 			"Action": [
+				"iam:ListEntitiesForPolicy",
 				"ssm:GetCommandInvocation",
 				"ssm:TerminateSession",
 				"ssm:StartSession",
